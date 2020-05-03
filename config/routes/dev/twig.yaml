@@ -1,0 +1,4 @@
+_errors:
+    host: admin.bundles.do
+    resource: '@TwigBundle/Resources/config/routing/errors.xml'
+    prefix: /_error

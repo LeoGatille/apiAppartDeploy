@@ -1,0 +1,69 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        api_login:
+            host: api.bundles.do
+            pattern: ^/login
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            host: api.bundles.do
+            pattern: ^/
+            stateless: true
+            anonymous: true
+            provider: fos_userbundle
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        dev:
+            host: admin.bundles.do
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            host: admin.bundles.do
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+            logout: true
+            anonymous: true
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/login$, host: admin.bundles.do, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/food/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/formula/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/allergen/admin, host: api.bundles.do, role: ROLE_USER }
+
+        - { path: ^/wine/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/category/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/color/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/designation/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/label/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/vintage/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/image/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/event/admin, host: api.bundles.do, role: ROLE_USER }
+
+        - { path: ^/message/admin, host: api.bundles.do, role: ROLE_USER }

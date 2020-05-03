@@ -1,0 +1,14 @@
+controllers:
+    host: admin.bundles.do
+    resource: ../../src/Controller/
+    type: annotation
+
+api_auth_login:
+    host: api.bundles.do
+    path: /login
+    methods: [POST]
+
+api_controllers:
+    host: api.bundles.do
+    resource: ../../src/ApiController/
+    type: annotation
