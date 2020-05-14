@@ -126,11 +126,11 @@ class EventController extends AbstractFOSRestController
       $event->setPriceWithDrinks($price_with_drinks);
 
       $foods = $request->get('foods');
-      if ($foods) {
-        $old_foods = $event->getFood();
+      $old_foods = $event->getFood();
         foreach ($old_foods as $key => $old_foods){
           $event->removeFood($old_foods);
         };
+      if ($foods) {
         foreach ($foods as $foodId) {
           $food = $foodRepository->find($foodId);
           $event->addFood($food);
