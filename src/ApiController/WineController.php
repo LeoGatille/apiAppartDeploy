@@ -95,7 +95,6 @@ class WineController extends AbstractFOSRestController
         $status = $statusRepository->find($statusId);
       } else {
         return View::create('le statut selectionné n\'existe pas', Response::HTTP_EXPECTATION_FAILED);
-
       }
       if (!is_null($status)) {
         $wine->setStatus($status);
@@ -109,7 +108,6 @@ class WineController extends AbstractFOSRestController
       } else {
         return View::create('la catégorie selectionnée n\'existe pas', Response::HTTP_EXPECTATION_FAILED);
       }
-
       if (!is_null($category)) {
         $wine->setCategory($category);
       } else {
@@ -134,7 +132,6 @@ class WineController extends AbstractFOSRestController
       } else {
         return View::create('la couleur selectionnée n\'existe pas', Response::HTTP_EXPECTATION_FAILED);
       }
-
       if (!is_null($color)) {
         $wine->setColor($color);
       } else {
@@ -147,7 +144,6 @@ class WineController extends AbstractFOSRestController
       } else {
         return View::create('le label selectionnée n\'existe pas', Response::HTTP_EXPECTATION_FAILED);
       }
-
       if (!is_null($label)) {
         $wine->setLabel($label);
       } else {
@@ -159,9 +155,7 @@ class WineController extends AbstractFOSRestController
         $vintage = $vintageRepository->find($vintageId);
       } else {
         return View::create('le millésime selectionnée n\'existe pas', Response::HTTP_EXPECTATION_FAILED);
-
       }
-
       if (!is_null($vintage)) {
         $wine->setVintage($vintage);
       } else {
@@ -312,25 +306,20 @@ class WineController extends AbstractFOSRestController
    */
   public function patch(Request $request, Wine $wine, StatusRepository $statusRepository): View
   {
-
-      $em = $this->getDoctrine()->getManager();
-
-      $statusId = $request->get('status');
+      $em = $this->getDoctrine()->getManager();      $statusId = $request->get('status');
       $status = $statusRepository->find($statusId);
       if (!is_null($status)) {
         $wine->setStatus($status);
       } else {
-        return View::create('le statut selectionne n\'existe pas', Response::HTTP_EXPECTATION_FAILED);
+        return View::create(
+          'le statut selectionne n\'existe pas', 
+          Response::HTTP_EXPECTATION_FAILED
+        );
       }
-
-
       $em->persist($wine);
       $em->flush();
-
       $wine = $this->normalize($wine);
-      return View::create($wine, Response::HTTP_OK);
-
-
+      return View::create($wine, Response::HTTP_CREATED);
   }
 
   /**

@@ -84,19 +84,15 @@ class MessageController extends AbstractFOSRestController
   public function patch(Request $request, Message $message): View
   {
       $em = $this->getDoctrine()->getManager();
-
       $display = $request->get('display');
       if ($display !== 1) {
         $display = 0;
       }
       $message->setDisplay($display);
-
       $em->persist($message);
       $em->flush();
-
       $message = $this->normalize($message);
       return View::create($message, Response::HTTP_OK);
-
   }
 
 

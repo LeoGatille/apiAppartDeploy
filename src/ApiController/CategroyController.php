@@ -95,9 +95,7 @@ class CategroyController extends AbstractFOSRestController
    */
   public function create(Request $request, CategoryRepository $categoryRepository): View
   {
-   
       $category  = new Category;
-
       $category_name = $request->get('categoryName');
       if (isset($category_name) && !empty($category_name)) {
         $category->setCategoryName($category_name);
@@ -107,16 +105,11 @@ class CategroyController extends AbstractFOSRestController
       } else {
         return View::create('le nom saisit est invalid', Response::HTTP_EXPECTATION_FAILED);
       }
-
       $em = $this->getDoctrine()->getManager();
       $em->persist($category);
       $em->flush();
-
       $category = $this->normalize($category);
       return View::create($category, Response::HTTP_CREATED);
-  
-
-
   }
 
   /**

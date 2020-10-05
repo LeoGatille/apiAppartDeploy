@@ -79,24 +79,18 @@ class FoodController extends AbstractFOSRestController
         } else {
           return View::create('la description envoyé n\'est pas valide', Response::HTTP_EXPECTATION_FAILED);
         }
-        }
-      
-
-
+      }
       $food_display = $request->get('display');
       if ($food_display !== 1) {
         $food_display = 0;
       }
       $food->setDisplay($food_display);
-
-
       $typeId = $request->get('type');
       if (is_numeric($typeId)) {
         $type = $typeRepository->find($typeId);
       } else {
         return View::create('le type envoyé n\'est pas valide', Response::HTTP_EXPECTATION_FAILED);
       }
-
       if (!is_null($type)) {
         $food->setType($type);
       } else {

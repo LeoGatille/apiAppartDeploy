@@ -65,5 +65,4 @@ security:
         - { path: ^/vintage/admin, host: api.bundles.do, role: ROLE_USER }
         - { path: ^/image/admin, host: api.bundles.do, role: ROLE_USER }
         - { path: ^/event/admin, host: api.bundles.do, role: ROLE_USER }
-
         - { path: ^/message/admin, host: api.bundles.do, role: ROLE_USER }

@@ -89,13 +89,10 @@ class AllergenController extends AbstractFOSRestController
   public function edit(Request $request, Allergen $allergen) : View
   {
     $em = $this->getDoctrine()->getManager();
-
     $allergen_name = $request->get('allergenName');
     $allergen->setAllergenName($allergen_name);
-
     $em->persist($allergen);
     $em->flush();
-
     $label = $this->normalize($allergen);
     return View::create($allergen, Response::HTTP_CREATED);
   }

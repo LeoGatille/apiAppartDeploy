@@ -50,33 +50,29 @@ class ImageController extends AbstractFOSRestController
    */
   public function create(Request $request): View
   {
-      $file = $request->files->get('image');
-      //$file = $dataFile['file'];
-      $dataOther = $request->get('alternative');
-      $alternative = $dataOther;
-      if ($file) {
-        $image = new Image();
-        $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-
-        try {
-          $file->move(
-            $this->getParameter('image_abs_path'),
-            $fileName
-          );
-        } catch (FileException $e) {
-
-        }
-        $image->setPath($this->getParameter('image_abs_path').'/'.$fileName);
-        $image->setImgPath($this->getParameter('image_path').'/'.$fileName);
-        $image->setAlternative($alternative);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($image);
-        $entityManager->flush();
-
-        return View::create($image, Response::HTTP_CREATED);
-      } else {
-        return View::create('failed to create file', Response::HTTP_EXPECTATION_FAILED);
-      }
+    $file = $request->files->get('image');
+    //$file = $dataFile['file'];
+    $dataOther = $request->get('alternative');
+    $alternative = $dataOther;
+    if ($file) {
+      $image = new Image();
+      $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+      try {
+        $file->move(
+          $this->getParameter('image_abs_path'),
+          $fileName
+        );
+      } catch (FileException $e) {}
+      $image->setPath($this->getParameter('image_abs_path').'/'.$fileName);
+      $image->setImgPath($this->getParameter('image_path').'/'.$fileName);
+      $image->setAlternative($alternative);
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($image);
+      $entityManager->flush();
+      return View::create($image, Response::HTTP_CREATED);
+    } else {
+      return View::create('échec de l\'enregistrement', Response::HTTP_EXPECTATION_FAILED);
+    }
 
 
   }
@@ -93,9 +89,7 @@ class ImageController extends AbstractFOSRestController
       $this->removeFile($image->getPath());
       $em->remove($image);
       $em->flush();
-
       return View::create(array(), Response::HTTP_OK);
-
   }
 
   /**

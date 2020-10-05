@@ -121,14 +121,10 @@ class ColorController extends AbstractFOSRestController
    */
   public function delete(Color $color): View
   {
-   
       $em = $this->getDoctrine()->getManager();
       $em->remove($color);
       $em->flush();
-
       return View::create(array(), Response::HTTP_OK);
-    
-
   }
 
 
