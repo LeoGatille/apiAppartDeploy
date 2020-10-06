@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * @Route("/allergen", host="api.bundles.do")
+ * @Route("/allergen", host="api-appart.leo-gatille.com")
  */
 class AllergenController extends AbstractFOSRestController
 {

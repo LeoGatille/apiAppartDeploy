@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Serializer;
  * Class AuthController
  * @Rest\Route(
  *     path="auth",
- *     host="api.bundles.do"
+ *     host="api-appart.leo-gatille.com"
  * )
  */
 class AuthController extends AbstractFOSRestController

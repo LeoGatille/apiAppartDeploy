@@ -13,7 +13,7 @@ security:
 
     firewalls:
         api_login:
-            host: api.bundles.do
+            host: api-appart.leo-gatille.com
             pattern: ^/login
             stateless: true
             anonymous: true
@@ -22,7 +22,7 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
-            host: api.bundles.do
+            host: api-appart.leo-gatille.com
             pattern: ^/
             stateless: true
             anonymous: true
@@ -53,16 +53,16 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login$, host: admin.bundles.do, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/food/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/formula/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/allergen/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/food/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/formula/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/allergen/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
 
-        - { path: ^/wine/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/category/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/color/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/designation/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/label/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/vintage/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/image/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/event/admin, host: api.bundles.do, role: ROLE_USER }
-        - { path: ^/message/admin, host: api.bundles.do, role: ROLE_USER }
+        - { path: ^/wine/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/category/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/color/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/designation/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/label/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/vintage/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/image/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/event/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }
+        - { path: ^/message/admin, host: api-appart.leo-gatille.com, role: ROLE_USER }

@@ -4,11 +4,11 @@ controllers:
     type: annotation
 
 api_auth_login:
-    host: api.bundles.do
+    host: api-appart.leo-gatille.com
     path: /login
     methods: [POST]
 
 api_controllers:
-    host: api.bundles.do
+    host: api-appart.leo-gatille.com
     resource: ../../src/ApiController/
     type: annotation
